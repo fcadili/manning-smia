@@ -2,9 +2,11 @@ package com.optimagrowth.license.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.GenericGenerator;
 import org.springframework.hateoas.RepresentationModel;
 
 import lombok.Getter;
@@ -18,6 +20,8 @@ import lombok.ToString;
 public class License extends RepresentationModel<License> {
 
 	@Id
+	@GeneratedValue(generator = "UUID")
+	@GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
 	@Column(name = "license_id", nullable = false)
 	private String licenseId;
 	private String description;

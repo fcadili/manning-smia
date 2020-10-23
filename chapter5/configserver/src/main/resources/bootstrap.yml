@@ -3,7 +3,8 @@ spring:
     name: config-server
   profiles:
     active:
-    - native, git
+    - native
+    #- native, git
   cloud:
     config:
       server:

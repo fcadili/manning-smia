@@ -1,9 +1,8 @@
 package com.optimagrowth.license.service;
 
-import java.util.UUID;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.optimagrowth.license.config.ServiceConfig;
@@ -26,13 +25,13 @@ public class LicenseService {
 	public License getLicense(String licenseId, String organizationId){
 		License license = licenseRepository.findByOrganizationIdAndLicenseId(organizationId, licenseId);
 		if (null == license) {
-			throw new IllegalArgumentException(String.format(messages.getMessage("license.search.error.message", null, null),licenseId, organizationId));	
+			throw new IllegalArgumentException(messages.getMessage("license.search.error.message",
+					new String[] { licenseId, organizationId }, LocaleContextHolder.getLocale()));
 		}
 		return license.withComment(config.getProperty());
 	}
 
 	public License createLicense(License license){
-		license.setLicenseId(UUID.randomUUID().toString());
 		licenseRepository.save(license);
 
 		return license.withComment(config.getProperty());
@@ -46,10 +45,9 @@ public class LicenseService {
 
 	public String deleteLicense(String licenseId){
 		String responseMessage = null;
-		License license = new License();
-		license.setLicenseId(licenseId);
-		licenseRepository.delete(license);
-		responseMessage = String.format(messages.getMessage("license.delete.message", null, null),licenseId);
+		licenseRepository.deleteById(licenseId);
+		responseMessage = messages.getMessage("license.delete.message", new String[] { licenseId },
+				LocaleContextHolder.getLocale());
 		return responseMessage;
 
 	}

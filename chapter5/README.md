@@ -32,11 +32,24 @@ $ mvn clean package dockerfile:build
 $ docker-compose -f docker/docker-compose.yml up
 ```
 
-# The build command
+# The verify command
 
-Will execute the [Spotify dockerfile plugin](https://github.com/spotify/dockerfile-maven) defined in the pom.xml file.  
+Will execute the [io.fabric8 plugin](https://github.com/fabric8io/docker-maven-plugin) defined in the pom.xml file.
 
-This is the first chapter we will have multiple Spring projects that need to be be built and compiled.  Running the above command at the root of the project directory will build all of the projects.  If everything builds successfully you should see a message indicating that the build was successful.
+This is the first chapter we will have multiple Spring projects that need to be be built and compiled.  Running the above command at the root of the project directory will build all of the projects.  If everything builds successfully you should see a message indicating that the command was successful.
+
+# Test with eclipse
+
+Build Postgresql docker using:
+
+$ cd docker
+$ docker build -t ostock/postgresql -f dockerfile-db .
+
+Run the docker from docker directory with the following command:
+
+$ docker run --env-file env.dev ostock/postgresql
+
+Run the configserver project and then the licensing-service project.
 
 # The Run command
 

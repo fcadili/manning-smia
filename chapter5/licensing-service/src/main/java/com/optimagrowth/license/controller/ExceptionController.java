@@ -12,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import com.optimagrowth.license.model.utils.ErrorMessage;
@@ -28,7 +27,7 @@ import com.optimagrowth.license.model.utils.RestErrorList;
 
 
 @ControllerAdvice
-@EnableWebMvc
+//@EnableWebMvc
 public class ExceptionController extends ResponseEntityExceptionHandler {
 
 
